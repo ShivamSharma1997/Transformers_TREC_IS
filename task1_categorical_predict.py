@@ -1,6 +1,7 @@
 import re
 import sys
 import json
+import math
 import string
 import gzip
 
@@ -21,6 +22,9 @@ file_path = './data/test/2020B_main'
 cat_dict_path = './data/TASK1/TASK1_categorical.json'
 
 ####################### MAIN CODE #######################
+
+def sigmoid(x):
+  return 1 / (1 + math.exp(-x))
 
 def clean_tweet(text):
 
@@ -77,8 +81,10 @@ _, raw_outputs = model.predict(text_list)
 predictions = []
 
 for output in raw_outputs:
-    weights = softmax(output)
-    predictions.append(weights)
+    temp = []
+    for val in output:
+        temp.append(val)
+    predictions.append(temp)
 
 pred_list = []
 
